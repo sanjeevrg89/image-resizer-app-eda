@@ -1,0 +1,17 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: image-resizer-scaledobject
+  namespace: default
+spec:
+  scaleTargetRef:
+    name: image-resizer-deployment
+  minReplicaCount: 1   # Optional. Default: 0
+  maxReplicaCount: 100 # Optional. Default: 100
+  triggers:
+  - type: aws-sqs-queue
+    metadata:
+      queueURL: "https://sqs.YOUR_REGION.amazonaws.com/YOUR_ACCOUNT_ID/YOUR_QUEUE_NAME"
+      region: "YOUR_REGION"
+      awsRoleArn: "arn:aws:iam::YOUR_ACCOUNT_ID:role/YOUR_IAM_ROLE"
+      identityOwner: "operator"
