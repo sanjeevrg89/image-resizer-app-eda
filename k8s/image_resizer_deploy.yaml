@@ -3,7 +3,7 @@ kind: ServiceAccount
 metadata:
   name: image-resizer-sa
   annotations:
-    eks.amazonaws.com/role-arn: arn:aws:iam::ACCOUNT_ID:role/IAM_ROLE_NAME
+    eks.amazonaws.com/role-arn: arn:aws:iam::436805326321:role/EKSImageResizerRole
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -22,6 +22,6 @@ spec:
       serviceAccountName: image-resizer-sa
       containers:
       - name: image-resizer
-        image: 
+        image: public.ecr.aws/g3a2b0e2/image-resizer:v1
         ports:
         - containerPort: 80
